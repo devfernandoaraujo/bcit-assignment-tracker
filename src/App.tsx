@@ -1,22 +1,32 @@
 import { Header } from "./components/Header";
-import { Assignments } from "./components/Assignments";
+import { Assignments, AssignmentObject } from "./components/Assignments";
 import {useState} from 'react';
 
 function App() {
 
-  const[assignmentList, setAssignmentList] = useState<string[]>([]);
+  const[assignmentList, setAssignmentList] = useState<AssignmentObject[]>([]);
   const [assignmentCount, setAssignmentCount] = useState(0);
   const [assignmentFinished, setAssignmentFinished] = useState(0);
 
-  const handleUpdateAssignmentFinished = ()=>{
-    
+  const handleUpdateAssignmentFinished = (assignmentId: string)=>{
+    alert(assignmentId);
+    setAssignmentList((prevList) =>
+    prevList.map((assignment) => {
+      if (assignment.id === assignmentId) {
+        return { ...assignment, finished: true };
+      }
+      return assignment;
+    })
+  );
     setAssignmentFinished(assignmentFinished + 1);
   }
 
-  const handleRemoveAssignmentButtonClick = (assignmentId: number, isFinished: boolean) => {
+  const handleRemoveAssignmentButtonClick = (assignmentId: string, isFinished: boolean) => {
+    
      setAssignmentList((prevList) =>
-      prevList.filter((_, index) => index !== assignmentId)
+      prevList.filter((item) => item.id !== assignmentId)
     );
+
     if(isFinished){
         setAssignmentFinished(assignmentFinished -1);
     }
@@ -24,8 +34,8 @@ function App() {
     setAssignmentCount(assignmentCount - 1);
   }
 
-  const handleAssignmentButtonClick = (assignmentName: string) => {
-     setAssignmentList((prevList) => [...prevList,assignmentName]);
+  const handleAssignmentButtonClick = (assignment: AssignmentObject) => {
+     setAssignmentList((prevList) => [...prevList,assignment]);
      setAssignmentCount(assignmentCount + 1);
   }
   return (

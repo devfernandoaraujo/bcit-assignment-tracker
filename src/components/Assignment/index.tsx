@@ -4,23 +4,19 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { useState } from "react";
 
 type AssignmentProps={
-  id:number;
-  assignmentName: string;
+  assignment: {name: string, id: string, finished: boolean};
   assignmentCount: number;
   assignmentFinished: number;
-  updateFinishedAssignment: ()=>void;
-  handleRemoveAssignment: (assignmentId: number, isFinished: boolean) => void;
+  updateFinishedAssignment: (assignmentId: string)=>void;
+  handleRemoveAssignment: (assignmentId: string, isFinished: boolean) => void;
 }
 
 
 
 export function Assignment( props: AssignmentProps ) {
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
-  const handleFinishAssignmentButton =() => {
-    
-    props.updateFinishedAssignment();
-    setIsButtonDisabled(true);
+  
+  const handleFinishAssignmentButton =(assignmentId: string) => {
+    props.updateFinishedAssignment(assignmentId);
   }
 
 
@@ -28,13 +24,13 @@ export function Assignment( props: AssignmentProps ) {
 
   return (
     <div className={styles.assignment}>
-      <button className={styles.checkContainer} onClick={ handleFinishAssignmentButton } disabled={isButtonDisabled}>
-        {isButtonDisabled ? (<BsCheckCircleFill size={20}/>) : (<div />) } 
+      <button className={styles.checkContainer} onClick={()=> handleFinishAssignmentButton(props.assignment.id) } disabled={props.assignment.finished}>
+        {props.assignment.finished ? (<BsCheckCircleFill size={20}/>) : (<div />) } 
       </button>
 
-      <p className={ isButtonDisabled? styles.textCompleted  : ""}>{props.assignmentName}</p>
+      <p className={ props.assignment.finished? styles.textCompleted  : ""}>{props.assignment.name}</p>
 
-      <button className={styles.deleteButton} onClick={ ()=> props.handleRemoveAssignment(props.id, isButtonDisabled) }>
+      <button className={styles.deleteButton} onClick={ ()=> props.handleRemoveAssignment(props.assignment.id, props.assignment.finished) }>
         <TbTrash size={20} />
       </button>
     </div>

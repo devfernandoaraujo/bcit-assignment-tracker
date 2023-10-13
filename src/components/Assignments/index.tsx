@@ -1,12 +1,19 @@
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
+
+export type AssignmentObject={
+  name: string;
+  id:string;
+  finished:  boolean;
+}
+
 type AssignmentsProps ={
-  assignmentList: string[];
+  assignmentList: AssignmentObject[];
   assignmentCount: number;
   assignmentFinished: number;
-  updateFinishedAssignment: ()=>void;
-  handleRemoveAssignment: (assignmentId: number, isFinished: boolean) => void;
+  updateFinishedAssignment: (assignmentId: string)=>void;
+  handleRemoveAssignment: (assignmentId: string, isFinished: boolean) => void;
 }
 
 export function Assignments(props : AssignmentsProps ) {
@@ -25,16 +32,15 @@ export function Assignments(props : AssignmentsProps ) {
       </header>
 
       <div className={styles.list}>
-        {props.assignmentList.map((value, idx)=>(
-          <Assignment 
-                id = {idx}
-                assignmentName = {value} 
-                key={idx}  
-                assignmentCount={props.assignmentCount} 
-                assignmentFinished = {props.assignmentFinished} 
-                updateFinishedAssignment ={ props.updateFinishedAssignment}
-                handleRemoveAssignment = { props.handleRemoveAssignment }/>
-                
+        {props.assignmentList.map(({ name, id, finished }, idx) => (
+          <Assignment
+            assignment={{ name, id, finished }}
+            key={idx}
+            assignmentCount={props.assignmentCount}
+            assignmentFinished={props.assignmentFinished}
+            handleRemoveAssignment={props.handleRemoveAssignment}
+            updateFinishedAssignment={props.updateFinishedAssignment}
+          />
         ))}
         
       </div>
