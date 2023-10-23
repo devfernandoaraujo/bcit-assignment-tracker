@@ -47,3 +47,27 @@ p.textCompleted {
   border: none;
   color: #808080;
 }
+
+.dueDateOnTime{
+  background-color:  #91A3B0;
+  border-radius: 1rem;
+  padding: 0.3rem 1.3rem;
+}
+
+.dueDateTomorrow{
+  background-color: #900D09;
+  border-radius: 1rem;
+  padding: 0.3rem 1.3rem;
+}
+
+.dueDateToday{
+  background-color: #8b0000;
+  border-radius: 1rem;
+  padding: 0.3rem 1.3rem;
+}
+
+.dueDatePast{
+  background-color: #4E0707;
+  border-radius: 1rem;
+  padding: 0.3rem 1.3rem;
+}

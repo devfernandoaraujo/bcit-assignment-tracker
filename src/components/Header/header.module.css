@@ -33,7 +33,7 @@
   color: #808080;
 }
 
-.newAssignmentForm button {
+.newAssignmentForm .headerButton {
   height: 100%;
   padding: 0 16px;
   background: #8284fa;
@@ -47,6 +47,13 @@
   font-size: 14px;
 }
 
-.newAssignmentForm button:disabled {
+.newAssignmentForm .headerButton:disabled {
   background: gray;
+}
+
+.newAssignmentForm .newAssignmentCalendar{
+  background: #999999;
+  border-radius: 1.1rem;
+  position:absolute;
+  top: 4rem;
 }

@@ -6,6 +6,7 @@ export type AssignmentObject={
   name: string;
   id:string;
   finished:  boolean;
+  dueDate: Date
 }
 
 type AssignmentsProps ={
@@ -32,9 +33,9 @@ export function Assignments(props : AssignmentsProps ) {
       </header>
 
       <div className={styles.list}>
-        {props.assignmentList.map(({ name, id, finished }, idx) => (
+        {props.assignmentList.map(({ name, id, finished, dueDate }, idx) => (
           <Assignment
-            assignment={{ name, id, finished }}
+            assignment={{ name, id, finished, dueDate }}
             key={idx}
             assignmentCount={props.assignmentCount}
             assignmentFinished={props.assignmentFinished}

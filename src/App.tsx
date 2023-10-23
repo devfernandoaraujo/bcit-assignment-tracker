@@ -9,7 +9,6 @@ function App() {
   const [assignmentFinished, setAssignmentFinished] = useState(0);
 
   const handleUpdateAssignmentFinished = (assignmentId: string)=>{
-    alert(assignmentId);
     setAssignmentList((prevList) =>
     prevList.map((assignment) => {
       if (assignment.id === assignmentId) {
